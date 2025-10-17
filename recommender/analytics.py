@@ -8,7 +8,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# Business analytics module for user segmentation, insights, and business metrics
+# This is where I analyze the data to find interesting patterns and business insights.
+# I built this to show how ML engineers should think about the business impact
+# of their models, not just the technical metrics.
 
 
 def load_user_demographics(data_root: str) -> pd.DataFrame:
@@ -30,15 +32,15 @@ def load_user_demographics(data_root: str) -> pd.DataFrame:
 
 
 def analyze_user_segments(ratings: pd.DataFrame, items: pd.DataFrame, users: pd.DataFrame) -> Dict:
-    """Analyze user behavior patterns by demographics."""
+    """Find interesting patterns in how different types of users behave."""
     if users.empty:
         return {}
     
-    # Merge data
+    # Combine all the data so we can slice and dice it
     full_data = ratings.merge(users, on="user_id", how="left")
     full_data = full_data.merge(items[["item_id", "title"]], on="item_id", how="left")
     
-    # Age segments
+    # Create age groups - this always reveals interesting patterns
     full_data["age_group"] = pd.cut(full_data["age"], 
                                    bins=[0, 25, 35, 50, 100], 
                                    labels=["Young", "Adult", "Middle-aged", "Senior"])

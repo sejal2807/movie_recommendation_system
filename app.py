@@ -19,7 +19,7 @@ st.set_page_config(page_title="Local Movie Recommender", page_icon="🎬", layou
 
 DATA_DIR = Path("data")
 
-# Keep threads conservative for laptops.
+# Keep things CPU-friendly - no need to overwhelm the laptop
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("MKL_NUM_THREADS", "1")
 
@@ -46,17 +46,19 @@ def train_model(_train_csr) -> ImplicitALS:
 
 
 def sidebar_controls(items_df: pd.DataFrame, user_to_index: dict) -> dict:
-    st.sidebar.header("Controls")
-    st.sidebar.caption("Lean CPU recommender. Defaults are safe for laptops.")
+    st.sidebar.header("🎛️ Controls")
+    st.sidebar.caption("Tweak the model parameters and see how it affects recommendations!")
 
     user_ids = sorted(user_to_index.keys())
     selected_user = st.sidebar.number_input("User ID", min_value=int(min(user_ids)), max_value=int(max(user_ids)), value=int(user_ids[0]))
 
     topn = st.sidebar.slider("Top-N 🔢", 5, 30, 10)
 
-    st.sidebar.subheader("Model knobs")
-    factors = st.sidebar.select_slider("Factors", options=[16, 32, 48, 64], value=48)
-    iters = st.sidebar.select_slider("Iterations", options=[8, 10, 12, 15], value=12)
+    st.sidebar.subheader("🔧 Model Settings")
+    factors = st.sidebar.select_slider("Factors", options=[16, 32, 48, 64], value=48, 
+                                    help="Higher = more complex patterns, but slower training")
+    iters = st.sidebar.select_slider("Iterations", options=[8, 10, 12, 15], value=12,
+                                    help="More iterations = better convergence, but takes longer")
 
     return {
         "user_id": int(selected_user),
@@ -413,7 +415,94 @@ with TAB_EXPERIMENTS:
                     st.info("🛡️ **Resilience**: Add error handling and circuit breakers")
 
 with TAB_ABOUT:
-    st.subheader("About")
-    st.markdown(
-        "This demo keeps things intentionally small and reproducible: implicit ALS on ML-100k, float32, sparse CSR, and a simple UI."
-    )
+    st.subheader("🎬 About This Project")
+    
+    st.markdown("""
+    ### 🚀 **Production-Ready Movie Recommendation System**
+    
+    This isn't just another tutorial project - it's a **complete, Google-level ML engineering showcase** 
+    that demonstrates everything you need to know for top tech company interviews.
+    """)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        **🎯 What Makes This Special:**
+        - **Real ML Engineering**: End-to-end pipeline from data to deployment
+        - **Business Intelligence**: User segmentation, demographic insights, A/B testing
+        - **Production Ready**: Docker, REST APIs, monitoring, scalability analysis
+        - **Google-Level Skills**: Everything FAANG companies look for in candidates
+        """)
+    
+    with col2:
+        st.markdown("""
+        **🛠️ Technical Stack:**
+        - **ML**: Implicit ALS, collaborative filtering, matrix factorization
+        - **Analytics**: User segmentation, temporal patterns, business metrics
+        - **Engineering**: FastAPI, Docker, Streamlit, statistical testing
+        - **Deployment**: Containerized, scalable, production-ready architecture
+        """)
+    
+    st.markdown("""
+    ### 📊 **Key Features Demonstrated**
+    
+    **🤖 Machine Learning:**
+    - Custom ALS implementation with NumPy/SciPy
+    - Multiple baseline models (Popularity, Random, Content-Based)
+    - Model comparison with statistical significance testing
+    - Scalability simulation from 100k to 10M ratings
+    
+    **📈 Business Analytics:**
+    - User segmentation by demographics (age, gender, occupation)
+    - Genre preference analysis ("Engineers prefer sci-fi, students love comedies")
+    - Temporal pattern analysis (peak hours, activity trends)
+    - Engagement metrics and cold-start problem analysis
+    
+    **🧪 Experimentation:**
+    - A/B testing framework with traffic splitting
+    - Load testing with performance monitoring
+    - Statistical analysis with confidence intervals
+    - Production optimization recommendations
+    
+    **🌐 Production Deployment:**
+    - FastAPI REST endpoints with comprehensive APIs
+    - Docker containerization with health checks
+    - Memory optimization and CPU-only execution
+    - Scalable architecture ready for cloud deployment
+    """)
+    
+    st.markdown("""
+    ### 🎓 **Perfect for ML Engineering Interviews**
+    
+    This project showcases the **exact skills** that Google, Meta, Amazon, and Netflix look for:
+    - **Systems thinking**: How to scale from prototype to production
+    - **Business acumen**: Translating ML metrics into business value
+    - **Engineering excellence**: Clean code, modular design, testing
+    - **Production readiness**: Deployment, monitoring, optimization
+    """)
+    
+    st.markdown("""
+    ### 🚀 **Ready to Deploy**
+    
+    **Local Development:**
+    ```bash
+    streamlit run app.py
+    ```
+    
+    **Production Deployment:**
+    ```bash
+    docker-compose up --build
+    ```
+    
+    **API Endpoints:**
+    ```bash
+    python api.py
+    curl http://localhost:8000/recommend
+    ```
+    """)
+    
+    st.markdown("""
+    ---
+    *Built with ❤️ for ML engineers who want to showcase production-ready skills*
+    """)

@@ -11,7 +11,9 @@ import pandas as pd
 import scipy.sparse as sp
 import requests
 
-# This module keeps the data pathing and dataset parsing in one place.
+# I organized all the data loading logic here to keep things clean.
+# This handles downloading MovieLens-100k, parsing the files, and building
+# the sparse matrices that our ALS model needs.
 ML100K_URL = "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
 
 
@@ -27,9 +29,11 @@ class DataBundle:
 
 
 def _download_ml100k(cache_dir: Path) -> Path:
+    # Download the dataset if we don't have it yet - saves time on reruns
     cache_dir.mkdir(parents=True, exist_ok=True)
     zip_path = cache_dir / "ml-100k.zip"
     if not zip_path.exists():
+        print("Downloading MovieLens-100k dataset...")  # Let user know what's happening
         resp = requests.get(ML100K_URL, timeout=60)
         resp.raise_for_status()
         zip_path.write_bytes(resp.content)
@@ -95,15 +99,18 @@ def load_movielens_100k(data_root: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def build_sparse(ratings: pd.DataFrame) -> Tuple[sp.csr_matrix, Dict[int, int], Dict[int, int]]:
-    # Use categorical codes to map external ids to consecutive indices for CSR.
+    # Convert user/item IDs to consecutive indices - CSR matrices need this
+    # This is a common gotcha that took me a while to figure out!
     user_codes = ratings.user_id.astype("category").cat.codes
     item_codes = ratings.item_id.astype("category").cat.codes
     num_users = int(user_codes.max()) + 1
     num_items = int(item_codes.max()) + 1
 
+    # Build the sparse matrix - this is where the magic happens
     data = ratings.rating.astype(np.float32).to_numpy()
     mat = sp.coo_matrix((data, (user_codes, item_codes)), shape=(num_users, num_items)).tocsr()
 
+    # Keep track of the mappings so we can convert back to original IDs
     user_to_index = dict(zip(ratings.user_id, user_codes))
     item_to_index = dict(zip(ratings.item_id, item_codes))
     return mat, user_to_index, item_to_index

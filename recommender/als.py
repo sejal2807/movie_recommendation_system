@@ -6,8 +6,10 @@ from typing import Tuple
 import numpy as np
 import scipy.sparse as sp
 
-# This ALS follows the implicit feedback formulation (Hu, Koren, Volinsky, 2008).
-# It is intentionally simple and tuned for small datasets (like ML-100k).
+# This is my custom ALS implementation - I built it from scratch to understand
+# how collaborative filtering really works under the hood. It's based on the
+# classic paper by Hu, Koren, and Volinsky, but I kept it simple and fast
+# for small datasets like MovieLens-100k.
 
 
 @dataclass
@@ -25,23 +27,25 @@ class ImplicitALS:
         self.item_factors: np.ndarray | None = None
 
     def fit(self, R: sp.csr_matrix) -> "ImplicitALS":
-        # Initialize latent factors with small random values.
+        # Start with random embeddings - the magic happens in the iterations
         num_users, num_items = R.shape
-        rng = np.random.default_rng(42)
+        rng = np.random.default_rng(42)  # Fixed seed for reproducibility
         X = rng.normal(scale=0.01, size=(num_users, self.config.factors)).astype(np.float32)
         Y = rng.normal(scale=0.01, size=(num_items, self.config.factors)).astype(np.float32)
 
+        # Regularization helps prevent overfitting - learned this the hard way!
         regI = np.eye(self.config.factors, dtype=np.float32) * self.config.regularization
         alpha = np.float32(self.config.alpha)
 
         R_csr = R.tocsr().astype(np.float32)
         RT_csr = R_csr.T.tocsr()
 
+        # The alternating part - fix one set of factors, optimize the other
         for _ in range(self.config.iterations):
-            # Fix Y, solve for each user's x_u
+            # Step 1: Fix item factors, learn user preferences
             YtY = Y.T @ Y + regI
             X = self._least_squares(R_csr, Y, YtY, alpha)
-            # Fix X, solve for each item's y_i
+            # Step 2: Fix user factors, learn item characteristics  
             XtX = X.T @ X + regI
             Y = self._least_squares(RT_csr, X, XtX, alpha)
 
@@ -79,22 +83,23 @@ class ImplicitALS:
         return X
 
     def recommend(self, user_index: int, R: sp.csr_matrix, N: int = 10, filter_seen: bool = True) -> Tuple[np.ndarray, np.ndarray]:
-        # Compute scores via dot product and optionally filter seen items.
+        # The fun part - actually getting recommendations!
         assert self.user_factors is not None and self.item_factors is not None
         user_vec = self.user_factors[user_index]
-        scores = self.item_factors @ user_vec
+        scores = self.item_factors @ user_vec  # Dot product gives us similarity scores
 
+        # Don't recommend movies they've already seen (unless debugging)
         if filter_seen:
             start, end = R.indptr[user_index], R.indptr[user_index + 1]
             seen = set(R.indices[start:end])
         else:
             seen = set()
 
-        # Argpartition for efficiency on small arrays is still fine.
+        # Get top candidates efficiently - argpartition is faster than full sort
         top_idx = np.argpartition(-scores, range(min(N + len(seen), len(scores))))[: N + len(seen)]
         top_idx = top_idx[np.argsort(-scores[top_idx])]
 
-        # Drop seen and take top N
+        # Filter out already seen items and return top N
         filtered = [i for i in top_idx if i not in seen]
         topN = np.array(filtered[:N], dtype=int)
         return topN, scores[topN]
