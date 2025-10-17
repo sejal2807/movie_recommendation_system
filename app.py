@@ -418,21 +418,21 @@ with TAB_ABOUT:
     st.subheader("🎬 About This Project")
     
     st.markdown("""
-    ### 🚀 **Production-Ready Movie Recommendation System**
+    ### 🚀 **My Movie Recommendation System**
     
-    This isn't just another tutorial project - it's a **complete, Google-level ML engineering showcase** 
-    that demonstrates everything you need to know for top tech company interviews.
+    I built this project to learn how recommendation systems actually work in production.
+    It's not just a tutorial - it's a complete system that shows real ML engineering skills.
     """)
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
-        **🎯 What Makes This Special:**
-        - **Real ML Engineering**: End-to-end pipeline from data to deployment
-        - **Business Intelligence**: User segmentation, demographic insights, A/B testing
-        - **Production Ready**: Docker, REST APIs, monitoring, scalability analysis
-        - **Google-Level Skills**: Everything FAANG companies look for in candidates
+        **🎯 What I Learned:**
+        - **ML Engineering**: How to build end-to-end pipelines from data to deployment
+        - **Business Analytics**: User segmentation, demographic insights, A/B testing
+        - **Production Skills**: Docker, REST APIs, monitoring, scalability analysis
+        - **Real-World Application**: How to think about ML problems beyond just algorithms
         """)
     
     with col2:
@@ -473,13 +473,13 @@ with TAB_ABOUT:
     """)
     
     st.markdown("""
-    ### 🎓 **Perfect for ML Engineering Interviews**
+    ### 🎓 **What This Project Taught Me**
     
-    This project showcases the **exact skills** that Google, Meta, Amazon, and Netflix look for:
+    Building this helped me understand:
     - **Systems thinking**: How to scale from prototype to production
-    - **Business acumen**: Translating ML metrics into business value
-    - **Engineering excellence**: Clean code, modular design, testing
-    - **Production readiness**: Deployment, monitoring, optimization
+    - **Business perspective**: Translating ML metrics into real business value
+    - **Engineering practices**: Clean code, modular design, proper testing
+    - **Production challenges**: Deployment, monitoring, and optimization
     """)
     
     st.markdown("""
@@ -504,5 +504,5 @@ with TAB_ABOUT:
     
     st.markdown("""
     ---
-    *Built with ❤️ for ML engineers who want to showcase production-ready skills*
+    *Built with ❤️ to learn how recommendation systems work in the real world*
     """)

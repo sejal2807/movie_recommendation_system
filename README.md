@@ -1,17 +1,17 @@
 # 🎬 Movie Recommendation System
 
-> **This isn't just another tutorial project** - it's a complete, production-ready ML engineering showcase that demonstrates everything you need to know for top tech company interviews.
+> **I built this project to learn how recommendation systems actually work in production.**
 
-I built this to show how **real ML engineers** think about problems: from collaborative filtering algorithms to business analytics, A/B testing, and scalable deployment. Perfect for Google, Meta, Amazon, and Netflix interviews! 🚀
+This isn't just another tutorial - it's a complete system that shows real ML engineering skills. I wanted to understand everything from collaborative filtering algorithms to business analytics, A/B testing, and scalable deployment. 🚀
 
-## ✨ What Makes This Special
+## ✨ What I Built
 
-- **🤖 Custom ML Implementation**: Built ALS from scratch with NumPy/SciPy (no black boxes!)
+- **🤖 Custom ML Implementation**: I built ALS from scratch with NumPy/SciPy (no black boxes!)
 - **📊 Business Intelligence**: User segmentation, demographic insights, temporal patterns
 - **🔬 Production Testing**: A/B testing framework, load testing, scalability simulation
 - **🌐 Production Ready**: FastAPI REST endpoints, Docker containerization
 - **📈 Real Analytics**: "Engineers prefer sci-fi, students love comedies" - actual insights!
-- **🎓 Interview Ready**: Everything FAANG companies look for in ML engineers
+- **🎓 Learning Focus**: Everything I needed to understand ML engineering
 
 ## 🚀 Get Started in 3 Ways
 
@@ -110,14 +110,14 @@ kubectl apply -f k8s/
 | **Memory** | <500MB | Runs on any modern laptop |
 | **Accuracy** | Recall@10 ~0.20-0.35 | Competitive with production systems |
 
-## 🎓 Why This Matters for Interviews
+## 🎓 What I Learned
 
-This project showcases the **exact skills** that Google, Meta, Amazon, and Netflix look for:
+Building this project taught me:
 
-- **🤖 ML Engineering**: End-to-end pipeline, model comparison, A/B testing
-- **💼 Business Acumen**: User segmentation, demographic insights, business metrics
+- **🤖 ML Engineering**: How to build end-to-end pipelines, model comparison, A/B testing
+- **💼 Business Perspective**: User segmentation, demographic insights, business metrics
 - **🏗️ Software Engineering**: Clean architecture, API design, modular code
 - **📊 Data Science**: Statistical analysis, experimentation framework
 - **🚀 Production Skills**: Docker, scalability, monitoring, deployment
 
-**Perfect for ML Engineering, Data Science, and Software Engineering interviews!** 🎯
+**This project helped me understand how ML systems work in the real world!** 🎯
