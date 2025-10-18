@@ -91,7 +91,7 @@ with TAB_RECS:
         frame = store["items"][store["items"]["item_id"].isin(item_ids)][["item_id", "title", "release_date", "Comedy", "Drama", "Action"]].copy()
         order = pd.Series(scores, index=item_ids).sort_values(ascending=False)
         frame["score"] = frame.item_id.map(order)
-        st.dataframe(frame.sort_values("score", ascending=False), use_container_width=True)
+        st.dataframe(frame.sort_values("score", ascending=False), width='stretch')
 
 with TAB_USER:
     st.subheader("Explore User")
@@ -108,7 +108,7 @@ with TAB_USER:
             "item_id": [store["index_to_item"][i] for i in item_indices],
         })
         user_items = user_items.merge(store["items"][['item_id','title']], on='item_id', how='left')
-        st.dataframe(user_items.sort_values("rating", ascending=False).head(30), use_container_width=True)
+        st.dataframe(user_items.sort_values("rating", ascending=False).head(30), width='stretch')
 
 with TAB_ITEM:
     st.subheader("Item Details & Similar")
@@ -123,7 +123,7 @@ with TAB_ITEM:
         frame = store["items"][store["items"]["item_id"].isin(sim_ids)][["item_id", "title", "release_date"]].copy()
         order = pd.Series(sims, index=sim_ids).sort_values(ascending=False)
         frame["similarity"] = frame.item_id.map(order)
-        st.dataframe(frame.sort_values("similarity", ascending=False), use_container_width=True)
+        st.dataframe(frame.sort_values("similarity", ascending=False), width='stretch')
 
 with TAB_METRICS:
     st.subheader("Offline Metrics (quick)")
@@ -177,7 +177,7 @@ with TAB_ANALYTICS:
             st.subheader("👥 User Demographics")
             if "gender" in segment_analysis and not segment_analysis["gender"].empty:
                 gender_data = segment_analysis["gender"]
-                st.dataframe(gender_data, use_container_width=True)
+                st.dataframe(gender_data, width='stretch')
         
         with col2:
             st.subheader("📈 Business Metrics")
@@ -188,7 +188,7 @@ with TAB_ANALYTICS:
                     ["Avg Rating", f"{business_metrics.get('avg_rating', 0):.2f}/5.0"],
                     ["Cold Start Ratio", f"{business_metrics.get('cold_start_ratio', 0):.1%}"],
                 ], columns=["Metric", "Value"])
-                st.dataframe(metrics_df, use_container_width=True)
+                st.dataframe(metrics_df, width='stretch')
         
         # Genre preferences
         if "gender_genre" in genre_insights:
@@ -233,7 +233,7 @@ with TAB_COMPARE:
             # Display results
             st.subheader("📊 Performance Comparison")
             comparison_df = comparator.get_comparison_table()
-            st.dataframe(comparison_df, use_container_width=True)
+            st.dataframe(comparison_df, width='stretch')
             
             # Show insights
             st.subheader("💡 Key Insights")
@@ -294,7 +294,7 @@ with TAB_EXPERIMENTS:
                 col3.metric("Memory Usage", f"{baseline['memory_usage']:.1f}MB")
                 
                 st.subheader("🚀 Scalability Projections")
-                st.dataframe(report_df, use_container_width=True)
+                st.dataframe(report_df, width='stretch')
                 
                 # Show key insights
                 st.subheader("💡 Scalability Insights")
@@ -358,7 +358,7 @@ with TAB_EXPERIMENTS:
                 if results:
                     st.subheader("📊 A/B Test Results")
                     summary_df = ab_framework.get_experiment_summary(experiment_name)
-                    st.dataframe(summary_df, use_container_width=True)
+                    st.dataframe(summary_df, width='stretch')
                     
                     # Show winner
                     if len(results) >= 2:
@@ -431,7 +431,7 @@ with TAB_ABOUT:
         **🎯 What I Learned:**
         - **ML Engineering**: How to build end-to-end pipelines from data to deployment
         - **Business Analytics**: User segmentation, demographic insights, A/B testing
-        - **Production Skills**: Docker, REST APIs, monitoring, scalability analysis
+        - **Production Skills**: Monitoring, scalability analysis, performance optimization
         - **Real-World Application**: How to think about ML problems beyond just algorithms
         """)
     
@@ -440,8 +440,8 @@ with TAB_ABOUT:
         **🛠️ Technical Stack:**
         - **ML**: Implicit ALS, collaborative filtering, matrix factorization
         - **Analytics**: User segmentation, temporal patterns, business metrics
-        - **Engineering**: FastAPI, Docker, Streamlit, statistical testing
-        - **Deployment**: Containerized, scalable, production-ready architecture
+        - **Engineering**: Streamlit, statistical testing, modular architecture
+        - **Deployment**: Scalable, production-ready, cloud-compatible
         """)
     
     st.markdown("""
@@ -465,11 +465,11 @@ with TAB_ABOUT:
     - Statistical analysis with confidence intervals
     - Production optimization recommendations
     
-    **🌐 Production Deployment:**
-    - FastAPI REST endpoints with comprehensive APIs
-    - Docker containerization with health checks
+    **🌐 Production Ready:**
+    - Streamlit web application with interactive UI
     - Memory optimization and CPU-only execution
     - Scalable architecture ready for cloud deployment
+    - Modular design for easy maintenance and extension
     """)
     
     st.markdown("""
@@ -490,15 +490,17 @@ with TAB_ABOUT:
     streamlit run app.py
     ```
     
-    **Production Deployment:**
+    **Streamlit Cloud Deployment:**
     ```bash
-    docker-compose up --build
-    ```
+    # 1. Push to GitHub
+    git add .
+    git commit -m "Add movie recommendation system"
+    git push origin main
     
-    **API Endpoints:**
-    ```bash
-    python api.py
-    curl http://localhost:8000/recommend
+    # 2. Deploy on Streamlit Cloud
+    # - Go to share.streamlit.io
+    # - Connect your GitHub repo
+    # - Deploy with one click!
     ```
     """)
     

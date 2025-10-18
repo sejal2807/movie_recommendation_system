@@ -9,13 +9,12 @@ This isn't just another tutorial - it's a complete system that shows real ML eng
 - **🤖 Custom ML Implementation**: I built ALS from scratch with NumPy/SciPy (no black boxes!)
 - **📊 Business Intelligence**: User segmentation, demographic insights, temporal patterns
 - **🔬 Production Testing**: A/B testing framework, load testing, scalability simulation
-- **🌐 Production Ready**: FastAPI REST endpoints, Docker containerization
 - **📈 Real Analytics**: "Engineers prefer sci-fi, students love comedies" - actual insights!
 - **🎓 Learning Focus**: Everything I needed to understand ML engineering
 
-## 🚀 Get Started in 3 Ways
+## 🚀 Get Started
 
-### 🖥️ **Option 1: Interactive UI (Recommended)**
+### 🖥️ **Interactive UI (Streamlit)**
 ```bash
 # Clone and install (takes 2 minutes)
 pip install -r requirements.txt
@@ -23,34 +22,11 @@ streamlit run app.py
 # Open http://localhost:8502 and explore!
 ```
 
-### 🐳 **Option 2: Docker (Production Ready)**
-```bash
-# One command to rule them all
-docker-compose up --build
-# Access UI at http://localhost:8501
-# Access API at http://localhost:8000
-```
-
-### 🔌 **Option 3: REST API (For Developers)**
-```bash
-# Start the API server
-python api.py
-
-# Test it works
-curl http://localhost:8000/health
-curl -X POST http://localhost:8000/recommend \
-  -H "Content-Type: application/json" \
-  -d '{"user_id": 1, "num_recommendations": 10}'
-```
-
 ## 📁 How I Organized This
 
 ```
 ├── app.py                 # 🎬 The main UI - where the magic happens
-├── api.py                 # 🌐 REST API for production deployment
 ├── requirements.txt       # 📦 All the Python packages you need
-├── Dockerfile            # 🐳 Container definition (production-ready)
-├── docker-compose.yml    # 🚀 Multi-service setup
 ├── recommender/          # 🧠 The ML brain of the operation
 │   ├── data.py           # 📊 Data loading & preprocessing
 │   ├── als.py            # 🤖 My custom ALS implementation
@@ -60,16 +36,6 @@ curl -X POST http://localhost:8000/recommend \
 │   └── experiments.py    # 🧪 A/B testing & scalability simulation
 └── data/                 # 💾 Dataset cache (auto-downloads ML-100k)
 ```
-
-## 🔌 API Endpoints (Production Ready)
-
-| Endpoint | Method | What it does |
-|----------|--------|--------------|
-| `/health` | GET | 🏥 Health check (is the service alive?) |
-| `/recommend` | POST | 🎯 Get personalized recommendations |
-| `/similar` | POST | 🔍 Find movies similar to a given one |
-| `/users/{user_id}/ratings` | GET | 📊 User's rating history |
-| `/stats` | GET | 📈 Dataset statistics & insights |
 
 ## 💡 The Cool Business Insights
 
@@ -88,17 +54,24 @@ This isn't just about ML - it's about **understanding your users**:
 - **🖥️ CPU-Only**: No GPU dependencies (runs on any laptop)
 - **📊 Scalable**: Ready for production deployment
 
-## 🚀 Production Deployment
+## 🚀 Deployment
 
+### 🖥️ **Local Development**
 ```bash
-# 🐳 Docker Compose (easiest)
-docker-compose up -d
+streamlit run app.py
+```
 
-# ☸️ Kubernetes (enterprise)
-kubectl apply -f k8s/
+### ☁️ **Streamlit Cloud (Recommended)**
+```bash
+# 1. Push to GitHub
+git add .
+git commit -m "Add movie recommendation system"
+git push origin main
 
-# ☁️ Cloud platforms
-# - AWS ECS / Google Cloud Run / Azure Container Instances
+# 2. Deploy on Streamlit Cloud
+# - Go to share.streamlit.io
+# - Connect your GitHub repo
+# - Deploy with one click!
 ```
 
 ## 📊 Performance Benchmarks
@@ -116,8 +89,8 @@ Building this project taught me:
 
 - **🤖 ML Engineering**: How to build end-to-end pipelines, model comparison, A/B testing
 - **💼 Business Perspective**: User segmentation, demographic insights, business metrics
-- **🏗️ Software Engineering**: Clean architecture, API design, modular code
+- **🏗️ Software Engineering**: Clean architecture, modular code, statistical analysis
 - **📊 Data Science**: Statistical analysis, experimentation framework
-- **🚀 Production Skills**: Docker, scalability, monitoring, deployment
+- **🚀 Production Skills**: Scalability analysis, performance optimization, monitoring
 
 **This project helped me understand how ML systems work in the real world!** 🎯
