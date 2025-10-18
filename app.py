@@ -420,91 +420,90 @@ with TAB_ABOUT:
     st.markdown("""
     ### 🚀 **My Movie Recommendation System**
     
-    I built this project to learn how recommendation systems actually work in production.
-    It's not just a tutorial - it's a complete system that shows real ML engineering skills.
+    Hey! I built this because I was curious about how Netflix and Spotify actually recommend stuff to us.
+    Turns out, it's way more interesting than I thought - there's a lot of math and business logic involved!
     """)
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
-        **🎯 What I Learned:**
-        - **ML Engineering**: How to build end-to-end pipelines from data to deployment
-        - **Business Analytics**: User segmentation, demographic insights, A/B testing
-        - **Production Skills**: Monitoring, scalability analysis, performance optimization
-        - **Real-World Application**: How to think about ML problems beyond just algorithms
+        **🎯 What I Actually Learned:**
+        - **ML Engineering**: How to build the whole pipeline from raw data to working recommendations
+        - **Business Analytics**: How to understand users and find patterns in their behavior
+        - **Production Skills**: How to make things fast, scalable, and actually usable
+        - **Real-World Thinking**: How to solve ML problems that matter to real businesses
         """)
     
     with col2:
         st.markdown("""
-        **🛠️ Technical Stack:**
-        - **ML**: Implicit ALS, collaborative filtering, matrix factorization
-        - **Analytics**: User segmentation, temporal patterns, business metrics
-        - **Engineering**: Streamlit, statistical testing, modular architecture
-        - **Deployment**: Scalable, production-ready, cloud-compatible
+        **🛠️ What I Used:**
+        - **ML**: Built ALS from scratch, collaborative filtering, matrix factorization
+        - **Analytics**: User segmentation, finding patterns in data, business insights
+        - **Engineering**: Streamlit for the UI, statistical testing, clean code structure
+        - **Deployment**: Made it scalable and ready for real users
         """)
     
     st.markdown("""
-    ### 📊 **Key Features Demonstrated**
+    ### 📊 **What This Actually Does**
     
-    **🤖 Machine Learning:**
-    - Custom ALS implementation with NumPy/SciPy
-    - Multiple baseline models (Popularity, Random, Content-Based)
-    - Model comparison with statistical significance testing
-    - Scalability simulation from 100k to 10M ratings
+    **🤖 The ML Stuff:**
+    - I coded up ALS from scratch using NumPy (no black boxes!)
+    - Built simple baseline models to compare against (popularity, random, etc.)
+    - Added statistical testing to see if my model is actually better
+    - Made it scalable from 100k to 10M ratings (just in case!)
     
-    **📈 Business Analytics:**
-    - User segmentation by demographics (age, gender, occupation)
-    - Genre preference analysis ("Engineers prefer sci-fi, students love comedies")
-    - Temporal pattern analysis (peak hours, activity trends)
-    - Engagement metrics and cold-start problem analysis
+    **📈 Business Insights:**
+    - Found out engineers really do love sci-fi, students prefer comedies
+    - Discovered when people actually rate movies (8 PM peak, more on weekends)
+    - Analyzed user demographics and behavior patterns
+    - Identified the cold-start problem (new users are tricky!)
     
-    **🧪 Experimentation:**
-    - A/B testing framework with traffic splitting
-    - Load testing with performance monitoring
-    - Statistical analysis with confidence intervals
-    - Production optimization recommendations
+    **🧪 Testing & Experiments:**
+    - Built an A/B testing framework to compare different models
+    - Added load testing to see how it performs under pressure
+    - Statistical analysis with confidence intervals (the real deal!)
+    - Performance optimization recommendations
     
     **🌐 Production Ready:**
-    - Streamlit web application with interactive UI
-    - Memory optimization and CPU-only execution
-    - Scalable architecture ready for cloud deployment
-    - Modular design for easy maintenance and extension
+    - Clean Streamlit interface that actually works
+    - Memory efficient (runs on my old laptop)
+    - Scalable architecture for real deployment
+    - Modular code that's easy to understand and extend
     """)
     
     st.markdown("""
-    ### 🎓 **What This Project Taught Me**
+    ### 🎓 **What I Actually Learned**
     
-    Building this helped me understand:
-    - **Systems thinking**: How to scale from prototype to production
-    - **Business perspective**: Translating ML metrics into real business value
-    - **Engineering practices**: Clean code, modular design, proper testing
-    - **Production challenges**: Deployment, monitoring, and optimization
+    This project taught me way more than I expected:
+    - **Systems thinking**: How to build something that can actually handle real users
+    - **Business perspective**: How to translate ML metrics into stuff that actually matters
+    - **Engineering practices**: How to write clean, modular code that other people can understand
+    - **Production challenges**: How to make things fast, reliable, and easy to deploy
     """)
     
     st.markdown("""
-    ### 🚀 **Ready to Deploy**
+    ### 🚀 **How to Run This Thing**
     
     **Local Development:**
     ```bash
     streamlit run app.py
     ```
     
-    **Streamlit Cloud Deployment:**
+    **Put It Online:**
     ```bash
-    # 1. Push to GitHub
+    # Push to GitHub first
     git add .
     git commit -m "Add movie recommendation system"
     git push origin main
     
-    # 2. Deploy on Streamlit Cloud
-    # - Go to share.streamlit.io
-    # - Connect your GitHub repo
-    # - Deploy with one click!
+    # Then go to share.streamlit.io
+    # Connect your GitHub repo
+    # Click deploy - that's it!
     ```
     """)
     
     st.markdown("""
     ---
-    *Built with ❤️ to learn how recommendation systems work in the real world*
+    *Built because I was curious about how Netflix actually works* 🎬
     """)
