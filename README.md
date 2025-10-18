@@ -76,6 +76,8 @@ git push origin main
 # Connect your GitHub repo
 # Click deploy - that's it!
 ```
+## Live Deployment 
+https://movielens-system.streamlit.app/
 
 ## How Fast Is It?
 
